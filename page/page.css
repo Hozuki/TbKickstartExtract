@@ -1,0 +1,8 @@
+
+.progress-hack-text {
+    color: white;
+    text-shadow: 0 0 7px black;
+    position: absolute;
+    left: 0;
+    right: 0;
+}

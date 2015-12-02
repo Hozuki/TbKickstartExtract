@@ -1,0 +1,59 @@
+首先，不需要登录即可浏览（这是匿名抓取的基础），也不需要保留cookie
+登录后多出“我收藏的”等等，不需要知道
+各种callback参数实际是JSONP方法的特色，给一个标识符然后过滤掉即可。
+
+首页（滚动）的：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&type=4&ids=10053544%2C10045850%2C10053303%2C10053481%2C10053654%2C10048936&callback=jsonpFirst
+首页 热门推荐：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&type=4&ids=10052050%2C10050115%2C10046658%2C10048980%2C10050689%2C10052621%2C10047276%2C10048476%2C10051497&callback=jsonpHot
+1F 科技：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&type=4&ids=10052454%2C10051316%2C10053071%2C10046107%2C10053194%2C10052178%2C10052734%2C10052671&callback=jsonpNav0
+2F 家居：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&type=4&ids=10047506%2C10047917%2C10049919%2C10053313%2C10050304%2C10052890%2C10052685%2C10051765&callback=jsonpNav1
+3F 设计：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&type=4&ids=10052274%2C10053791%2C10053453%2C10051996%2C10052947%2C10049861%2C10052012%2C10052505&callback=jsonpNav2
+... 6F
+（这些ids的参数从首页数据源来）
+
+人气排行：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?type=1&page=1&pageSize=5&callback=jsonpOrder
+最新上线：
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=12&type=2&callback=jsonpNew
+focus_count就是“喜欢”的数量
+
+按照类别浏览：
+（page参数0和1是等价的，都会返回第一页的数据）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=&type=6&status=&sort=1&callback=jsonpList（全部）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=121288001&type=6&status=&sort=1&callback=jsonpList（科技）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=123330001&type=6&status=&sort=1&callback=jsonpList（农业）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=122018001&type=6&status=&sort=1&callback=jsonpList（动漫）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=121292001&type=6&status=&sort=1&callback=jsonpList（设计）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=121280001&type=6&status=&sort=1&callback=jsonpList（工益）
+https://hstar-hi.alicdn.com/dream/ajax/getProjectList.htm?page=1&pageSize=20&projectType=121284001&type=6&status=&sort=1&callback=jsonpList（影音）
+
+首页数据源：
+http://hi.taobao.com/go/rgn/hi/homedata.php
+其中的 bottom_data 节对应首页的四个值
+
+查询某项目的相似项目：（param = {id}）（用来实现爬）←不需要了，在类别页上浏览即可
+https://izhongchou.taobao.com/dream/ajax/getProjectList.htm?type=5&recCount=5&id=10042009&callback=callback
+查询项目详情：（param = {id}，ac 非必需）（分档用）
+https://izhongchou.taobao.com/dream/ajax/getProjectForDetail.htm?id=10042009&ac=
+
+------ 主要分析过程 ------
+
+主页：
+https://izhongchou.taobao.com/index.htm
+项目页面：
+https://izhongchou.taobao.com/dreamdetail.htm?spm=a215p.1472805.0.0.iJCjUq&id=10051996
+（spm参数可略，不过估计是为了防止SPAM的，抓取频率请注意，一秒一个差不多了）
+
+用urllib抓下来，看原始的框架（此时JS未渲染，可以过滤许多后期加入的东西）
+
+首页核心脚本：
+http://g.alicdn.com/tb/kickstarter/1.8.4/pages/home_v2/page/init.js
+项目页核心脚本：
+http://g.alicdn.com/tb/kickstarter/1.8.4/pages/detail_v2/page/init.js
+header核心脚本：（获取分类用）
+http://g.alicdn.com/tb/kickstarter/1.8.4/pages/header_v2/page/header.js
+然后分析AJAX（KISSY.IO）

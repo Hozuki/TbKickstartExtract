@@ -1,0 +1,6 @@
+# id, type, name, url, lowest_price, lowest_price_person, hottest_price, hottest_price_person, is_hottest_price_full,
+# most_money_price, most_money_price_person, project_state, project_tb_state, project_state_text, total_money, total_person,
+# target_money, is_succeeded, like_count
+项目ID, 类别ID, 项目名称, 项目链接, 最低价格, 最低价格人数, 最热门价格(低价优先), 最热门价格人数, 热门是否已满,
+最多收入价格, 最多收入价格人数, 项目状态代码, 项目状态淘宝代码, 项目状态, 总计筹款金额, 总计支持人数,
+目标金额, 是否成功(0/1/2), 关注人数

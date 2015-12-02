@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taobao Kickstart Extract</title>
+    <link rel="stylesheet" href="../scripts/ext/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../scripts/ext/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="page.css"/>
+    <script type="text/javascript" src="../scripts/ext/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../scripts/ext/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+<body class="container">
+<div>
+    <div class="page-header">
+        <h3>Taobao Kickstart Extract</h3>
+
+        <div class="help-block">
+            某毕设数据的获取
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="row">
+                <h3>数据库</h3>
+
+                <p>
+                    <button id="btn-db-create" class="btn btn-sm btn-default">创建数据库</button>
+                </p>
+                <p>
+                    <button id="btn-db-open" class="btn btn-sm btn-primary">打开数据库</button>
+                </p>
+                <p>
+                    <button id="btn-db-close" class="btn btn-sm btn-default">关闭数据库</button>
+                </p>
+                <p>
+                    <button id="btn-db-delete" class="btn btn-sm btn-default">删除数据库</button>
+                </p>
+                <p>
+                    <button id="btn-db-export-to-csv" class="btn btn-sm btn-info">导出到 CSV</button>
+                </p>
+            </div>
+            <div class="row">
+                <h3>爬取内容</h3>
+
+                <div class="row">
+                    <form class="form-group form-inline" role="form">
+                        <div class="row">
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="121288001"
+                                                                           content="科技"/>科技</label>
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="121292001"
+                                                                           content="设计"/>设计</label>
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="122018001"
+                                                                           content="动漫"/>动漫</label>
+                        </div>
+
+                        <div class="row">
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="121280001"
+                                                                           content="公益"/>公益</label>
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="121284001"
+                                                                           content="影音"/>影音</label>
+                            <label class="checkbox checkbox-inline"><input type="checkbox" value="123330001"
+                                                                           content="农业"/>农业</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-success" id="btn-grab-start">开始爬取</button>
+                    <button type="button" class="btn btn-sm btn-danger" id="btn-grab-stop">停止爬取</button>
+                </div>
+            </div>
+            <div class="row">
+                <h3>信息窗口</h3>
+
+                <div>
+                    <button type="button" class="btn btn-sm btn-default" id="btn-clear-log">清除内容</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <h3>进度</h3>
+
+                <div class="progress text-center">
+                    <div class="progress-bar progress-bar-striped active"
+                         role="progressbar" style="width: 0;" id="pull-progress"
+                         aria-valuemax="0" aria-valuemin="100" aria-valuenow="40">
+                        <span class="progress-hack-text" id="label-progress-value">0%</span>
+                    </div>
+                </div>
+                <div class="label label-default" id="label-progress-title">启动</div>
+                <div class="help-block" id="label-progress-detail">打开数据库...</div>
+            </div>
+            <div class="row">
+                <h3>信息</h3>
+
+                <div id="text-log" style="height: 100%; max-height: 600px; overflow-y: auto;">
+                    <span id="text-log-holder"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="page.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+# Project dir
+.idea
+# NodeJS
+node_modules
+# Generated JS files
+page/**/*.js
+# External resources
+scripts/ext
+
+# Database & output file generated during run time
+tbkse.db
+tbkse-result.csv

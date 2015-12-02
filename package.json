@@ -1,0 +1,37 @@
+{
+  "name": "tbkse",
+  "version": "1.0.0",
+  "description": "Taobao Kickstart Extract",
+  "main": "page/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hozuki/TbKickstartExtract.git"
+  },
+  "keywords": [
+    "taobao kickstart",
+    "data extraction",
+    "csv"
+  ],
+  "author": "George Wu <uiharu@buaa.edu.cn>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hozuki/TbKickstartExtract/issues"
+  },
+  "homepage": "https://github.com/Hozuki/TbKickstartExtract#readme",
+  "dependencies": {
+    "bower": "^1.6.8",
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.9.2",
+    "sql.js": "^0.2.21"
+  },
+  "window": {
+    "width": 1024,
+    "height": 768,
+    "minWidth": 800,
+    "minHeight": 600
+  }
+}

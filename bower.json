@@ -1,0 +1,27 @@
+{
+  "name": "tbkse",
+  "description": "Taobao Kickstart Extract",
+  "main": "html/index.html",
+  "authors": [
+    "George Wu <uiharu@buaa.edu.cn>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "kickstart"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
