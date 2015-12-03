@@ -15,7 +15,7 @@ var tsConfig = {
 
 gulp.task("build", function () {
     var tsResult =
-        gulp.src(["page/**/*.ts", "scripts/inc/*/*.d.ts"])
+        gulp.src(["page/**/*.ts", "scripts/inc/**/*.d.ts"])
             //.pipe(sourcemaps.init())
             .pipe(ts(tsConfig));
     return tsResult.js

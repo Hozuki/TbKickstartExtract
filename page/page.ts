@@ -475,7 +475,8 @@ function mainGrabbingLoop(ev:MessageEvent):void {
 
         try {
             ++self.currentProjectIndex;
-            insertRecord();
+            combineProjectItemsByPrice(m);
+            insertRecord(m);
             self.debugLog("爬取进度: 项目 " + (self.currentProjectIndex + 1).toString() + "/" + self.totalProjectCount.toString());
             self.setProgressValue((self.currentProjectIndex + 1) / self.totalProjectCount * 100);
 
@@ -495,7 +496,36 @@ function mainGrabbingLoop(ev:MessageEvent):void {
             self.cleanupGrabbing();
         }
 
-        function insertRecord():void {
+        function combineProjectItemsByPrice(m:DbProjectMessage):void {
+            // 由于这里进行了按价格合并，所有除了价格是准确的，其他都是同价格中第一项的
+            // 这里强制所有价格选项进行去重，所以会有去重后数量不变的情况（无重复价格档）
+            var origItems = m.response.data.items;
+            if (origItems.length <= 0) {
+                return;
+            }
+            var map = new Map<number, TbProjectItem>();
+            var item:TbProjectItem;
+            for (var i = 0; i < origItems.length; ++i) {
+                var price = parseFloat(origItems[i].price);
+                if (!map.has(price)) {
+                    item = utils.cloneObject(origItems[i]);
+                    map.set(price, item);
+                } else {
+                    item = map.get(price);
+                    item.support_person = (parseInt(item.support_person) + parseInt(origItems[i].support_person)).toString();
+                    item.total = item.total + origItems[i].total;
+                }
+            }
+            var newItems:TbProjectItem[] = [];
+            map.forEach((item:TbProjectItem):void => {
+                newItems.push(item);
+            });
+            m.response.data.items = newItems;
+            map.clear();
+            map = null;
+        }
+
+        function insertRecord(m:DbProjectMessage):void {
             var row:DataRowFormat = {};
             try {
                 var currentProjectAbstract = self.cachedProjects[self.currentProjectIndex];

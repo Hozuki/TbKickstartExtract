@@ -220,7 +220,64 @@ export class utils {
                 break;
         }
         return r;
+    }
 
+    static cloneObject(sourceObject:any):any {
+        if (sourceObject === undefined || sourceObject === null) {
+            return sourceObject;
+        }
+        if (typeof sourceObject === "string" || typeof sourceObject === "number") {
+            return sourceObject;
+        }
+        /* Arrays */
+        if (sourceObject instanceof Array) {
+            var tmpArray:any[] = [];
+            for (var i = 0; i < sourceObject.length; ++i) {
+                tmpArray.push(utils.cloneObject(sourceObject[i]));
+            }
+            return tmpArray;
+        }
+        /* ES6 classes. Chrome has implemented a part of them so they must be considered. */
+        if ((<any>window)["Map"] !== undefined && sourceObject instanceof Map) {
+            var newMap = new Map<any, any>();
+            sourceObject.forEach((v:any, k:any) => {
+                newMap.set(k, v);
+            });
+            return newMap;
+        }
+        if ((<any>window)["Set"] !== undefined && sourceObject instanceof Set) {
+            var newSet = new Set<any>();
+            sourceObject.forEach((v:any) => {
+                newSet.add(v);
+            });
+            return newSet;
+        }
+        /* Classic ES5 functions. */
+        if (sourceObject instanceof Function) {
+            var fn = (function ():Function {
+                return function () {
+                    return sourceObject.apply(this, arguments);
+                }
+            })();
+            fn.prototype = sourceObject.prototype;
+            for (var key in sourceObject) {
+                if (sourceObject.hasOwnProperty(key)) {
+                    (<any>fn)[key] = (<any>sourceObject)[key];
+                }
+            }
+            return fn;
+        }
+        /* Classic ES5 objects. */
+        if (sourceObject instanceof Object || typeof sourceObject === "object") {
+            var newObject = Object.create(null);
+            for (var key in sourceObject) {
+                if (sourceObject.hasOwnProperty(key)) {
+                    newObject[key] = utils.cloneObject(sourceObject[key]);
+                }
+            }
+            return newObject;
+        }
+        return undefined;
     }
 
 }
