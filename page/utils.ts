@@ -127,10 +127,10 @@ export class utils {
                 indices.push(i);
             }
         }
-        var index:number = 0;
+        var index:number = indices[0];
         if (indices.length > 1) {
             for (i = 1; i < indices.length; ++i) {
-                c = primaryFunc(array[index], array[indices[i]]);
+                c = secondaryFunc(array[index], array[indices[i]]);
                 if (c > 0) {
                     index = i;
                 }

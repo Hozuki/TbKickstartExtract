@@ -524,7 +524,7 @@ function mainGrabbingLoop(ev:MessageEvent):void {
                         (tl:TbProjectItem, tr:TbProjectItem):number => {
                             // 这里要比较出最大值，所以反号
                             // 比较内容为购买人数，越多越好
-                            return -utils.compareNumber (parseInt(tl.support_person), parseInt(tr.support_person));
+                            return -utils.compareNumber(parseInt(tl.support_person), parseInt(tr.support_person));
                         }, (tl:TbProjectItem, tr:TbProjectItem):number => {
                             // 比较内容为价格，越少越好
                             return utils.compareNumber(parseFloat(tl.price), parseFloat(tr.price));

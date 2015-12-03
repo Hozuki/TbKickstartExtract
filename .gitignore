@@ -12,3 +12,4 @@ scripts/ext
 # Database & output file generated during run time
 tbkse.db
 tbkse-result.csv
+tbksec.csv
