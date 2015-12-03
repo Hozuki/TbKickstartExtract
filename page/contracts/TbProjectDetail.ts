@@ -84,15 +84,15 @@ export interface TbProjectDetailData {
      */
     seek_days:string;
     /**
-     * 同前
+     * 前期计划开始日期
      */
     plan_date:string;
     /**
-     * 同前
+     * 前期计划截止日期（然后就开始发起）
      */
     plan_end_date:string;
     /**
-     * 同前
+     * 不知道是什么，页面未用
      */
     plan_end_days:string;
     /**
@@ -200,7 +200,16 @@ export interface TbProjectItem {
 }
 
 export interface TbProjectFaq {
+    /**
+     * FAQ ID
+     */
     faq_id:string;
+    /**
+     * FAQ 问题内容
+     */
     question:string;
+    /**
+     * FAQ 答案
+     */
     answer:string;
 }
